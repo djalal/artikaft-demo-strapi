@@ -1,18 +1,25 @@
-FROM strapi/base
+FROM registry.artifakt.io/node:14
 
-WORKDIR /my-path
+WORKDIR /var/www/html/
 
-COPY ./package.json ./
-#COPY ./yarn.lock ./
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
 
-RUN yarn install
+# dependency management
+RUN npm install
 
+# copy the artifakt folder on root
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 COPY . .
+RUN  if [ -d .artifakt ]; then cp -rp /var/www/html/.artifakt /.artifakt/; fi
 
-ENV NODE_ENV production
+# PERSISTENT DATA FOLDERS
+# standard, no specifics
 
-RUN yarn build
-
-EXPOSE 1337
-
-CMD ["yarn", "start"]
+# run custom scripts build.sh
+# hadolint ignore=SC1091
+RUN --mount=source=artifakt-custom-build-args,target=/tmp/build-args \
+    if [ -f /tmp/build-args ]; then source /tmp/build-args; fi && \
+    if [ -f /.artifakt/build.sh ]; then /.artifakt/build.sh; fi

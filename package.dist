@@ -5,7 +5,7 @@
   "description": "A Strapi application",
   "scripts": {
     "develop": "strapi develop",
-    "start": "if [ \"$NODE_ENV\" = \"development\" ]; then strapi develop; else strapi start; fi;",
+    "start": "[ \"$NODE_ENV\" -eq \"development\" ] && echo develop || echo start",
     "build": "strapi build",
     "strapi": "strapi"
   },
