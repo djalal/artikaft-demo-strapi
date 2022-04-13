@@ -2,4 +2,7 @@
 
 npm run build
 
-chown -R www-data:www-data .
+cd /var/www/html/node_modules/\@strapi/strapi && npm link
+
+chown -R www-data:www-data /var/www/html/node_modules
+
