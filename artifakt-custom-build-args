@@ -6,6 +6,3 @@
 export NODE_ENV=production
 export HOST=0.0.0.0
 export PORT=80
-export APP_KEYS=3BP8Udb7GNwxhfoTZjS98A==,wLyP+sc7hX7i33vAYglVoQ==,ZzswfDPpEYEq1s3Y1JW/4Q==,RqRLamF+7qGPjn6rkPM3ng==
-export JWT_SECRET=6376f444-7e51-432a-b548-6e08621e6093
-export API_TOKEN_SALT=6ee488fe1379c02794357ae9206484ca
